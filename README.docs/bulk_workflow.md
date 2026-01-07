@@ -1,10 +1,6 @@
 # bulk rna seq ka workflow
-## Table 1: RNA-seq workflow steps, tools, and analyst-level intent
 
 # RNA-seq End-to-End Workflow
-
-
-## Table 1: RNA-seq workflow steps, tools, and analyst-level intent
 
 | Step                             | What happens                                                | Typical tools                                | Why this step matters (industry lens)                                         |
 | -------------------------------- | ----------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
