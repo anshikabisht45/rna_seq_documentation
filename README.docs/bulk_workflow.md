@@ -1,6 +1,6 @@
 # bulk rna seq ka workflow
 
-# RNA-seq End-to-End Workflow
+# RNA-seq End-to-End Workflow-
 
 | Step                             | What happens                                                | Typical tools                                | Why this step matters (industry lens)                                         |
 | -------------------------------- | ----------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
