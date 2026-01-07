@@ -1,3 +1,5 @@
+#this is for khushbu patel bulk seq the file she gave while explaining
+
 #!/bin/bash
 
 SECONDS=0
