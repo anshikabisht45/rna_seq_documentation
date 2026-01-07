@@ -182,4 +182,147 @@ First thing to check: **GTF–genome compatibility**.
 <img width="905" height="948" alt="{28A372AC-C26E-4A19-A489-76324494B70E}" src="https://github.com/user-attachments/assets/2f5c9128-a5f8-441e-a754-ecbc2a566e8b" />
 
 
+--------
+
+# Why RNA-seq Needs Splice-Aware Aligners
+
+## TL;DR
+RNA-seq reads come from **spliced mRNA**, not raw genomic DNA.  
+A **splice-aware aligner** can align reads that span **exon–exon junctions**.  
+A non-splice-aware aligner cannot.
+
+---
+
+## The biological problem (root cause)
+
+In eukaryotes:
+- Genes contain **exons** (kept)
+- and **introns** (removed)
+
+During transcription:
+DNA → pre-mRNA → (splicing) → mature mRNA
+
+sql
+Copy code
+
+RNA-seq sequences **mature mRNA**, where introns are already removed.
+
+So RNA-seq reads often look like:
+[ exon 1 ][ exon 2 ]
+
+yaml
+Copy code
+
+But in the genome, those exons are **far apart**.
+
+---
+
+## What goes wrong with non-splice-aware aligners
+
+Non-splice-aware aligners assume:
+- reads come from **continuous DNA**
+- no large gaps allowed
+
+Result:
+- reads spanning exon junctions
+  - fail to align
+  - or align incorrectly
+  - or get discarded
+
+This causes:
+- loss of signal
+- biased gene counts
+- false negatives in expression
+
+---
+
+## What splice-aware aligners do differently
+
+Splice-aware aligners:
+- allow **large gaps** in alignments
+- interpret gaps as **introns**
+- use known exon–intron structure (from GTF)
+- can also discover **novel splice junctions**
+
+They correctly align:
+read = exon1 | exon2
+genome = exon1 ---- intron ---- exon2
+
+yaml
+Copy code
+
+---
+
+## Role of the GTF file here
+
+The GTF helps splice-aware aligners:
+- know where exons start/end
+- speed up junction detection
+- improve alignment accuracy
+
+Important:
+- aligners can still find novel junctions
+- but GTF makes them **biologically informed**
+
+---
+
+## Common splice-aware RNA-seq aligners
+
+| Aligner | Splice-aware | Notes |
+|---|---|---|
+| STAR | Yes | Very fast, widely used |
+| HISAT2 | Yes | Memory-efficient |
+| Subread | Yes | Strong soft-clipping + counting |
+| Bowtie2 | ❌ No | Not suitable alone |
+| BWA | ❌ No | DNA-seq, not RNA-seq |
+
+---
+
+## Why this matters for gene expression analysis
+
+If junction-spanning reads are lost:
+- exon coverage drops
+- gene counts are underestimated
+- differential expression becomes unreliable
+
+Splice-aware alignment ensures:
+- accurate gene-level quantification
+- correct isoform detection
+- biologically valid results
+
+---
+
+## Analyst / interview explanation (clean & short)
+
+> *“RNA-seq reads originate from spliced mRNA, so many reads span exon–exon junctions that are discontinuous in the genome. Splice-aware aligners handle these gaps correctly, which is essential for accurate alignment and gene quantification.”*
+
+---
+
+## One-line mental model (remember this)
+
+**RNA-seq ≠ DNA-seq**  
+If the aligner can’t jump introns, it can’t read RNA.
+
+---
+
+## Common beginner mistake
+
+Using:
+- Bowtie2 / BWA alone
+- without splice awareness
+- for RNA-seq
+
+Result:
+> “My reads aligned poorly and counts look wrong.”
+
+Root cause:
+> Wrong aligner for spliced data.
+
+-----
+
+<img width="1520" height="943" alt="{19671F05-242E-4CF0-B77B-E52BB045ACBE}" src="https://github.com/user-attachments/assets/c70ef334-3b4b-42a6-a4d5-b94af92af9dc" />
+
+#RUN TIME, MEMORY USAGE AND ALIGNER ACCURACY FROM ALIGNERS...(NATURE`s ppr)
+
+<img width="1180" height="625" alt="{7A5FEA40-1951-45F0-A25A-C569BE431088}" src="https://github.com/user-attachments/assets/97d42462-5f0d-41c5-b2ea-2d3ccfc661b1" />
 
