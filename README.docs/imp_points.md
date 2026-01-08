@@ -141,11 +141,5 @@ This is dynamic, smarter trimming.
 <img width="790" height="537" alt="{246A5522-898B-4D1B-B87F-4094AA4D8F5C}" src="https://github.com/user-attachments/assets/67542a58-82f1-4fa8-bce9-b3f833374b63" />
 
 
-
-
-
-
-
-
-
 - These adapters make the library compatible with the sequencer, allowing thousands of samples to be pooled and identified, making them essential for modern high-throughput sequencing. 
+-excel is not right tool to view metadata as it might mess up sometimes the ids
