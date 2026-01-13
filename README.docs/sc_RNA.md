@@ -87,6 +87,46 @@ to know whether ur method is scalable
 <img width="1069" height="651" alt="{24E25876-C1A6-40AE-BC81-AA68E226F6A9}" src="https://github.com/user-attachments/assets/cdd8bcf5-62a1-4131-baf2-bd6191ad6198" />
 
 
+-------------
+
+LINKEDIN POST S
+
+🛑 Stop Confusing Bulk RNA-seq PCA with scRNA-seq UMAP
+I see this mistake constantly: A researcher looks at their integrated single-cell UMAP, sees that healthy and diseased samples are intermixed, and panics.
+"Integration overcorrected my data! It wiped out the biological differences!" 😱
+If you’re coming from Bulk RNA-seq, this intuition is actually hurting your analysis. Here is why:
+📍 The Fundamental Difference:
+🔹 Bulk RNA-seq (PCA): • Each dot = One sample (millions of cells pooled). • Goal: You WANT to see separation by condition. • Separation = Your treatment worked.
+🔹 scRNA-seq (UMAP): • Each dot = One individual cell. • Goal: You WANT to see samples intermingle within cell-type clusters. • Separation by sample = Batch effects (the enemy of integration).
+💡 What does "Success" look like?
+✅ Before Integration: Cells cluster by sample ID. This is a technical artifact that prevents you from comparing apples to apples. ✅ After Integration: T-cells from "Healthy" and "Diseased" samples sit together in one cluster. This is SUCCESSFUL batch correction. It allows you to see how a T-cell changes across conditions.
+🔎 "But where are my treatment effects?"
+They aren't gone! They just aren't meant to be the primary driver of UMAP topology. You find them through:
+1️⃣ Differential Expression: Comparing gene activity within the same cell-type cluster. 2️⃣ Compositional Shifts: Seeing if one condition has 2x more Monocytes than the other. 3️⃣ State Shifts: Identifying "activated" vs "naive" subpopulations within a cluster.
+🚀 The Bottom Line: If you can't see your treatment separation on the integrated UMAP, don't revert your integration. You’ve likely done it correctly. Stop applying bulk intuition to a single-cell world.
+Detailed breakdown of integration metrics and examples here: 👇 https://lnkd.in/gvhrekms
+
+----------------
+
+# dealing with high-throughput sequencing data. It breaks down the "black box" of analysis into digestible, step-by-step tutorials.
+https://bioinformaticsworkbook.org/#gsc.tab=0
+
+
+
+<img width="1173" height="878" alt="{781CA65B-0F76-44B0-9BAE-9D7E7B5CF910}" src="https://github.com/user-attachments/assets/70e1f1f8-36f0-40be-8350-ce5a62eb69a3" />
+
+
+<img width="1203" height="608" alt="{72F63EC0-7CD2-459E-BB18-FEEE0C78E335}" src="https://github.com/user-attachments/assets/bec230cf-41c8-4c87-b2d9-93b928b3419a" />
+
+
+---------
+
+Differential Expression with DESeq2
+
+https://bioinformaticsworkbook.org/dataAnalysis/RNA-Seq/RNA-SeqIntro/Differential-Expression-Analysis.html#gsc.tab=0
+
+
+isme deseq ka code h do see that
 
 
 
